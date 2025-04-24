@@ -1,0 +1,29 @@
+{
+  "name": "gradex",
+  "version": "1.0.0",
+  "description": "Aplicação web voltada a uma maior facilidade na organizaçç̃ao de horários de disciplinas com base no formato de horário da UFPE",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yangclima/gradex.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yangclima/gradex/issues"
+  },
+  "homepage": "https://github.com/yangclima/gradex#readme",
+  "dependencies": {
+    "next": "^15.3.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "prettier": "^3.5.3"
+  }
+}
