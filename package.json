@@ -4,7 +4,10 @@
   "description": "Aplicação web voltada a uma maior facilidade na organizaçç̃ao de horários de disciplinas com base no formato de horário da UFPE",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint:check": "prettier --check .",
+    "lint:fix": "prettier --write .",
+    "test": "jest",
+    "text:watch": "jest --watchAll"
   },
   "repository": {
     "type": "git",
