@@ -36,13 +36,10 @@ const shedules = {
   ],
 };
 
-function parseCode(code) {
-  const parseResult = {
-    weekDays: [],
-    shedules: {},
-  };
+export default function parseCode(code) {
+  const parseResult = {};
 
-  const codeValidatorRegex = /[1-7]+[MTN]{1}[1-6]+/;
+  const codeValidatorRegex = /[1-7]+[MTN]{1}[1-6]+/g;
   const weekDaysFormat = /[1-7]{1,2}[MTN]{1}/;
   const sheduleFormat = /[MTN]{1}[1-6]+/;
 
@@ -50,31 +47,32 @@ function parseCode(code) {
     throw "Invalid code";
   }
 
-  const codeTurn = code.match(/[MTN]{1}/)[0];
+  const input = code.match(codeValidatorRegex);
 
-  code
-    .match(weekDaysFormat)[0]
-    .split("")
-    .slice(0, -1)
-    .forEach((element) => {
-      day = weekDays[parseInt(element) - 1];
-      parseResult.weekDays.push(day);
-      parseResult.shedules[day] = [];
-    });
+  input.forEach((match) => {
+    const codeTurn = match.match(/[MTN]{1}/)[0];
 
-  code
-    .match(sheduleFormat)[0]
-    .split("")
-    .slice(1)
-    .forEach((element) => {
-      for (const chave in parseResult.shedules) {
-        parseResult.shedules[chave].push(
-          shedules[codeTurn][parseInt(element) - 1],
-        );
-      }
-    });
+    match
+      .match(weekDaysFormat)[0]
+      .split("")
+      .slice(0, -1)
+      .forEach((element) => {
+        const day = weekDays[parseInt(element) - 1];
+        parseResult[day] = [];
+      });
+
+    match
+      .match(sheduleFormat)[0]
+      .split("")
+      .slice(1)
+      .forEach((element) => {
+        for (const chave in parseResult) {
+          parseResult[chave].push(shedules[codeTurn][parseInt(element) - 1]);
+        }
+      });
+  });
 
   return parseResult;
 }
 
-module.exports = parseCode;
+console.log(parseCode("2T45 6T23"));

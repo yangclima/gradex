@@ -1,6 +1,10 @@
 import { ABBREVIATED_WEEK_DAYS, WEEK_DAYS, SHEDULES } from "utils/constants";
 
-export default function SheduleTable({ courseColors, dailyShedule }) {
+export default function SheduleTable({
+  courseColors,
+  dailyShedule,
+  removeCourse,
+}) {
   // Função para obter uma cor para um curso
   const getCourseColor = (course) => {
     return courseColors[course] || "bg-gray-100 border-gray-300 text-gray-800";
@@ -42,7 +46,8 @@ export default function SheduleTable({ courseColors, dailyShedule }) {
                         dailyShedule[day][timeDelta].map((course, idx) => (
                           <div
                             key={idx}
-                            className={`px-2 py-1 rounded-md text-xs font-medium border ${getCourseColor(
+                            onClick={() => removeCourse(course)}
+                            className={`px-2 py-1 rounded-md text-xs font-medium border cursor-pointer ${getCourseColor(
                               course,
                             )}`}
                           >
