@@ -69,7 +69,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50">
       {/* Mobile header with toggle button */}
-      <div className="md:hidden bg-white shadow-sm p-4 sticky top-0 z-10">
+      <div className="md:hidden bg-white shadow-sm p-4 sticky top-0 z-999">
         <div className="flex justify-between items-center">
           <h1 className="text-xl font-bold text-indigo-700">Horário Semanal</h1>
           <button
