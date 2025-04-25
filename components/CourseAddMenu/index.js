@@ -106,7 +106,7 @@ export default function AddCourseMenu({ addCourse }) {
           </div>
         </div>
 
-        <div className={(addType ? "" : "hidden") + "mb-3"}>
+        <div className={addType ? "" : "hidden"}>
           <label className="block text-sm font-medium mb-1">
             Código de horário
           </label>
@@ -140,9 +140,17 @@ export default function AddCourseMenu({ addCourse }) {
 
             addCourse(newCourse.name, courseContent);
           }}
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          className="mt-3 w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
         >
           Adicionar Disciplina
+        </button>
+        <button
+          onClick={() => {
+            toggleAddType(!addType);
+          }}
+          className="w-full bg-blue-300 text-white p-2 rounded hover:bg-blue-400 mt-3"
+        >
+          {addType ? "Usar propriedades" : "Usar código"}
         </button>
 
         {/* <div className="mt-4">

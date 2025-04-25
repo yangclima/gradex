@@ -1,40 +1,6 @@
-const weekDays = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-
-const shedules = {
-  M: [
-    "07:00-07:50",
-    "08:00-08:50",
-    "09:00-09:50",
-    "10:00-10:50",
-    "11:00-11:50",
-  ],
-
-  T: [
-    "12:00-12:50",
-    "13:00-13:50",
-    "14:00-14:50",
-    "15:00-15:50",
-    "16:00-16:50",
-    "17:00-17:50",
-  ],
-
-  N: [
-    "18:00-18:50",
-    "18:50-19:40",
-    "19:40-20:30",
-    "20:30-21:20",
-    "21:20-22:10",
-    "22:10-23:00",
-  ],
-};
+import { Result } from "postcss";
+import { SHEDULES, WEEK_DAYS } from "./constants.js";
+import mergeAndConcat from "./mergeAndConcat.js";
 
 export default function parseCode(code) {
   const parseResult = {};
@@ -49,16 +15,19 @@ export default function parseCode(code) {
 
   const input = code.match(codeValidatorRegex);
 
+  let result = {};
+
   input.forEach((match) => {
     const codeTurn = match.match(/[MTN]{1}/)[0];
+
+    const currentResult = {};
 
     match
       .match(weekDaysFormat)[0]
       .split("")
       .slice(0, -1)
       .forEach((element) => {
-        const day = weekDays[parseInt(element) - 1];
-        parseResult[day] = [];
+        currentResult[WEEK_DAYS[parseInt(element)].en] = [];
       });
 
     match
@@ -66,13 +35,13 @@ export default function parseCode(code) {
       .split("")
       .slice(1)
       .forEach((element) => {
-        for (const chave in parseResult) {
-          parseResult[chave].push(shedules[codeTurn][parseInt(element) - 1]);
-        }
+        Object.keys(currentResult).map((day) => {
+          currentResult[day].push(SHEDULES[codeTurn][parseInt(element) - 1]);
+        });
       });
+
+    result = mergeAndConcat(result, currentResult);
   });
 
-  return parseResult;
+  return result;
 }
-
-console.log(parseCode("2T45 6T23"));
